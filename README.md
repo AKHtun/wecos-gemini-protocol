@@ -62,3 +62,10 @@ wecos-gemini-protocol/
 └── scripts/
     └── gem_prompt.txt     ← Copy-paste prompt for Gem initialization
 ```
+
+
+## Repository Structure (PG Directive)
+
+
+## Quick Start
+

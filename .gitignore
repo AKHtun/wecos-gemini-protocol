@@ -1,0 +1,6 @@
+# Backend secrets — NEVER commit
+credentials/
+*.pem
+*.key
+*.key.
+
