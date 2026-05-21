@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/AKHtun/wecos-gemini-protocol/blob/main/protocol/schema.json",
+  "title": "WEcoS-Gemini State Envelope",
+  "description": "Machine-readable schema for WECOS-STATE-UPDATE envelopes exchanged between Gemini Gems and the Wizaya Ecosystem.",
+  "type": "object",
+  "required": [
+    "node_id",
+    "agent",
+    "scope",
+    "timestamp",
+    "metrics"
+  ],
+  "properties": {
+    "node_id": {
+      "type": "string",
+      "description": "Unique Gem identifier (e.g. 'pg-prompt-god', 'mt-mahar-thuriya')",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "agent": {
+      "type": "string",
+      "description": "Human-readable agent name"
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "gems:read",
+        "gems:write",
+        "gems:admin"
+      ],
+      "description": "Permission scope"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp with timezone"
+    },
+    "metrics": {
+      "type": "object",
+      "required": [
+        "intention_score",
+        "task_status",
+        "summary"
+      ],
+      "properties": {
+        "intention_score": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 10.0,
+          "description": "Gem's self-assessed confidence/priority (0.0 = noise, 10.0 = critical)"
+        },
+        "task_status": {
+          "type": "string",
+          "enum": [
+            "completed",
+            "blocked",
+            "in_progress",
+            "deferred",
+            "awaiting_input"
+          ],
+          "description": "Current task state"
+        },
+        "summary": {
+          "type": "string",
+          "maxLength": 280,
+          "description": "1-2 sentence summary"
+        }
+      }
+    },
+    "context_block": {
+      "type": "object",
+      "description": "Optional structured context (task-specific payload)"
+    }
+  }
+}
